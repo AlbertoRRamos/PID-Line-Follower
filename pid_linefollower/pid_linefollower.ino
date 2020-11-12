@@ -5,52 +5,49 @@
 
 long sensor[] = {0, 1, 2, 3, 4}; //leftmost - 0, rightmost - 4
 
-int rmf = 9;
-int rmb = 6;
-int lmf = 10; 
-int lmb = 11;
+int rmf = 9, rmb = 6;
+int lmf = 10, lmb = 11;
 
 //speeds
-int rspeed;
-int lspeed;
+int rspeed, lspeed;
+
 const int base_speed = 255;
 
-int pos;
+int pos, sensor_sum;
 long sensor_average;
-int sensor_sum;
 
 int button = 3; //to be pressed to find set point
 
-float p;
-float i;
-float d;
-float lp;
-float error;
-float correction;
-float sp;
+float p, i, d, lp, error, correction, sp;
 
-float Kp = 5; // dummy
-float Ki = 0; //dummy
+float Kp = 5, Ki = 0; // dummy
 float Kd = 40; //(Kp-1)*10
 
 void pid_calc();
 void calc_turn();
 void motor_drive(int , int );
 
-void setup()
-{
-  //sensors
+void setting_up_sensors(){
   pinMode(A0, INPUT);
   pinMode(A1, INPUT);
   pinMode(A2, INPUT);
   pinMode(A3, INPUT);
   pinMode(A4, INPUT);
+}
 
-  //motors
+void setting_up_motors(){
   pinMode(rmf, OUTPUT);
   pinMode(rmb, OUTPUT);
   pinMode(lmf, OUTPUT);
   pinMode(lmb, OUTPUT);
+}
+void setup()
+{
+  //sensors
+  setting_up_sensors();
+
+  //motors
+  setting_up_motors();
 
   Serial.begin(9600);
   
